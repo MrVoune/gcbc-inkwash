@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//GCBC//Kellogg Greater China Business Conference//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:gcbc-2027@gcbckellogg.com
+DTSTAMP:20261012T000000Z
+DTSTART:20270403T143000Z
+DTEND:20270403T223000Z
+SUMMARY:2027 Greater China Business Conference (GCBC)
+DESCRIPTION:Kellogg Greater China Business Conference — 21st anniversary. Global business leaders\, nonprofit executives\, and leading scholars explore the most pressing questions shaping today's global landscape. Panels span China and the global economy\, AI and technology\, investment\, healthcare\, advanced manufacturing\, and consumer goods.
+LOCATION:Kellogg Global Hub\, 2211 N Campus Dr\, Evanston\, IL 60208
+URL:https://gcbckellogg.com
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR
