@@ -131,8 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
+        const el = entry.target;
+        el.classList.add('is-visible');
+        io.unobserve(el);
+        /* the stagger delay belongs to the reveal only; once that has played, hover and other
+           transitions on the element must start straight away */
+        const delay = parseFloat(el.style.transitionDelay) || 0;
+        setTimeout(() => { el.style.transitionDelay = ''; }, delay + 900);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
@@ -315,21 +320,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const donorTypeField = document.querySelector('input[name="donor_type"]');
     const tiers = {
       individual: [
-        { value: '$300', label: '$300' },
-        { value: '$500', label: '$500' },
-        { value: '$1,000', label: '$1,000' }
+        { value: '$300', amount: '$300' },
+        { value: '$500', amount: '$500' },
+        { value: '$1,000', amount: '$1,000' }
       ],
       corporate: [
-        { value: 'Bronze ($1,000)', label: 'Bronze — $1,000' },
-        { value: 'Silver ($3,000)', label: 'Silver — $3,000' },
-        { value: 'Gold ($5,000)', label: 'Gold — $5,000' },
-        { value: 'Platinum ($8,000)', label: 'Platinum — $8,000' }
+        { value: 'Bronze ($1,000)', name: 'Bronze', amount: '$1,000' },
+        { value: 'Silver ($3,000)', name: 'Silver', amount: '$3,000' },
+        { value: 'Gold ($5,000)', name: 'Gold', amount: '$5,000' },
+        { value: 'Platinum ($8,000)', name: 'Platinum', amount: '$8,000' }
       ]
     };
     const renderTiers = (type) => {
       if (!tierOptionsEl) return;
       tierOptionsEl.innerHTML = tiers[type].map((t, i) =>
-        `<button type="button" class="tier-chip${i === 0 ? ' active' : ''}" data-value="${t.value}">${t.label}</button>`
+        /* tier name on the first line, amount on the second (individual gifts are just an amount) */
+        `<button type="button" class="tier-chip${i === 0 ? ' active' : ''}" data-value="${t.value}">${t.name ? `<span class="tier-name">${t.name}</span>` : ''}<span class="tier-amount">${t.amount}</span></button>`
       ).join('');
       if (tierInput) tierInput.value = tiers[type][0].value;
       tierOptionsEl.querySelectorAll('.tier-chip').forEach(chip => {

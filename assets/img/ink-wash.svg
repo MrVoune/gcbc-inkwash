@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1700" viewBox="0 0 1600 1700">
+  <!--
+    Loose ink-wash blooms for the page margins (写意): rust drifts in from the left,
+    slate from the right, with long gray mist bands between. Tiled vertically by body::after.
+  -->
+  <defs>
+    <filter id="bleed" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0065 0.011" numOctaves="4" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="170" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="22"/>
+    </filter>
+    <filter id="mist" x="-30%" y="-120%" width="160%" height="340%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004 0.014" numOctaves="3" seed="19" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="140" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="38"/>
+    </filter>
+  </defs>
+
+  <!-- mist bands -->
+  <g filter="url(#mist)" fill="#5d5d6b">
+    <ellipse cx="800" cy="430" rx="640" ry="46" fill-opacity=".04"/>
+    <ellipse cx="760" cy="1260" rx="700" ry="52" fill-opacity=".04"/>
+    <ellipse cx="900" cy="1620" rx="560" ry="40" fill-opacity=".03"/>
+  </g>
+
+  <!-- rust bloom, left -->
+  <g filter="url(#bleed)">
+    <ellipse cx="190" cy="470" rx="250" ry="105" fill="#8a4a42" fill-opacity=".16"/>
+    <ellipse cx="120" cy="505" rx="170" ry="60" fill="#7a3d37" fill-opacity=".13"/>
+    <ellipse cx="260" cy="1330" rx="230" ry="90" fill="#8a4a42" fill-opacity=".12"/>
+  </g>
+
+  <!-- slate bloom, right -->
+  <g filter="url(#bleed)">
+    <ellipse cx="1420" cy="860" rx="260" ry="100" fill="#33476f" fill-opacity=".16"/>
+    <ellipse cx="1490" cy="890" rx="170" ry="58" fill="#2a3b5f" fill-opacity=".13"/>
+    <ellipse cx="1360" cy="1590" rx="230" ry="88" fill="#33476f" fill-opacity=".12"/>
+  </g>
+</svg>
