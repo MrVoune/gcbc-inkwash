@@ -311,6 +311,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  document.querySelectorAll('[data-open-value]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const d = document.getElementById('sponsorship-value');
+      if (!d) return;
+      d.open = true;
+      d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
   const donorTypeBtns = document.querySelectorAll('.donor-type-btn');
   if (donorTypeBtns.length) {
     const nameLabel = document.getElementById('donate-name-label');
@@ -319,16 +329,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const tierInput = document.getElementById('donate-tier');
     const donorTypeField = document.querySelector('input[name="donor_type"]');
     const tiers = {
+      /* lowest tier first and pre-selected, as before; the tables above follow the package PDFs (highest first) */
       individual: [
-        { value: '$300', amount: '$300' },
-        { value: '$500', amount: '$500' },
-        { value: '$1,000', amount: '$1,000' }
+        { value: 'Pathfinder ($500)', name: 'Pathfinder', amount: '$500' },
+        { value: 'Advocate ($1,500)', name: 'Advocate', amount: '$1,500' },
+        { value: 'Ambassador ($3,000)', name: 'Ambassador', amount: '$3,000' }
       ],
       corporate: [
-        { value: 'Bronze ($1,000)', name: 'Bronze', amount: '$1,000' },
         { value: 'Silver ($3,000)', name: 'Silver', amount: '$3,000' },
         { value: 'Gold ($5,000)', name: 'Gold', amount: '$5,000' },
-        { value: 'Platinum ($8,000)', name: 'Platinum', amount: '$8,000' }
+        { value: 'Platinum ($8,000)', name: 'Platinum', amount: '$8,000' },
+        { value: 'In Kind (Products)', name: 'In Kind', amount: 'Products' }
       ]
     };
     const renderTiers = (type) => {
